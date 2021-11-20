@@ -1,64 +1,373 @@
 <!DOCTYPE html>
 <html>
-<head> 
-<meta charset="utf-8"> 
-<title>海螺姬</title> 
-</head>
-<body>
-<p>解24点。</p>
-	
 
-<div id="主体">
-<span>输入</span>
-<input id="a1"></input>
-</div>
-<div id="主体">
-<span>输入</span>
-<input id="a2"></input>
-</div>
-<div id="主体">
-<span>输入</span>
-<input id="a3"></input>
-</div>
-<div id="主体">
-<span>输入</span>
-<input id="a4"></input>
-</div>
-	
-<button onclick="main()">生成</button>
-<div id="结果"></div>
-<iframe src="//player.bilibili.com/player.html?aid=2057414&bvid=BV1yx411A7pV&cid=3185803&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/BuVJYUr6w9o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<head>
+    <meta charset="utf-8">
+    <title>语录检索器 聆听调老师的教诲</title>
+</head>
+
+<body>
+    <p>输入关键词以检索最相似语录.</p>
+    <div id="主体">
+        <span>=></span>
+        <input id="inp"></input>
+    </div>
+    <button onclick="rando()">随机获取一条</button>
+    <button onclick="main()">检索</button>
+    <button onclick="nextone()">下一张</button>
+    <p id="demo"></p>
+    <p id="demo2"></p>
+    <p>
+        <img id=image src="">
+    </p>
+    <p>
+        <img src="https://i0.hdslb.com/bfs/article/2ef62057ae7026ada28fe52512fe4292ee6049d6.jpg" alt="Smiley face"
+            width="495" height="412">
+    </p>
 </body>
+
 </html>
 <script>
-function main()
-{
-	a1 = document.getElementById("a1").value
-	a2 = document.getElementById("a2").value
-	a3 = document.getElementById("a3").value
-	a4 = document.getElementById("a4").value
-	
-	var arr = ["+", "-", "*", "/"]
-var input = [a1,a2,a3,a4]
-var res=""
-var b = [
-  ["((", "", ")", "", ")", ""],
-  ["(", "", ")", "(", "", ")"],
-  ["(", "(", "", "", ")", ")"],
-  ["", "((", "", "", ")", ")"],
-  ["", "(", "", "(", "", "))"]
-]
-for (var m = 0; m < 5; m++) {
-  for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
-      for (var k = 0; k < 4; k++) {
-        var calculate = b[m][0] + input[0] + arr[i] + b[m][1] + input[1] + b[m][2] + arr[j] + b[m][3] + input[2] + b[m][4] + arr[k] + input[3] + b[m][5]
-        if( eval(calculate)==24){res=calculate+"=24"}
-      }
+    tiao1 = [
+        "",
+        "https://i.postimg.cc/gkQPNhdT/01.jpg",
+        "https://i.postimg.cc/c15qL3KL/02.jpg",
+        "https://i.postimg.cc/SK43v7PD/03.jpg",
+        "https://i.postimg.cc/VNcPccJ9/04.jpg",
+        "https://i.postimg.cc/g2hb502k/05.jpg",
+        "https://i.postimg.cc/8ccqbpYG/06.jpg",
+        "https://i.postimg.cc/K8BCfs01/07.jpg",
+        "https://i.postimg.cc/vHppWdtR/08.jpg",
+        "https://i.postimg.cc/KjWCpXXM/09.jpg",
+        "https://i.postimg.cc/XvgmSBS3/10.jpg",
+        "https://i.postimg.cc/jdWpwjNQ/11.jpg",
+        "https://i.postimg.cc/9MFSWXC9/12.jpg",
+        "https://i.postimg.cc/NMJnLhjz/13.jpg",
+        "https://i.postimg.cc/13GYwVz6/14.jpg",
+        "https://i.postimg.cc/8c706yFP/15.jpg",
+        "https://i.postimg.cc/rs7YCSWG/16.jpg",
+        "https://i.postimg.cc/6QBb067P/17.jpg",
+        "https://i.postimg.cc/MKjLZF29/18.jpg",
+        "https://i.postimg.cc/L4W7pM7q/19.jpg",
+        "https://i.postimg.cc/Mp2Fnmzq/20.jpg",
+        "https://i.postimg.cc/fLLHGHfj/21.jpg",
+        "https://i.postimg.cc/TPQ7H8g3/22.jpg",
+        "https://i.postimg.cc/HxhSdQSG/23.jpg",
+        "https://i.postimg.cc/Y0Ld9hVv/24.jpg",
+        "https://i.postimg.cc/V5yDbzQD/25.jpg",
+        "https://i.postimg.cc/yYczpdd6/26.jpg",
+        "https://i.postimg.cc/BZd0CDJw/27.jpg",
+        "https://i.postimg.cc/7PC47Xr2/28.jpg",
+        "https://i.postimg.cc/vHppWdtR/08.jpg",
+        "https://i.postimg.cc/Cx0p3gBG/30.jpg",
+        "https://i.postimg.cc/pLBMx6zg/31.jpg",
+        "https://i.postimg.cc/tgCQgNz7/32.jpg",
+        "https://i.postimg.cc/VNGy007g/33.jpg",
+        "https://i.postimg.cc/PxPgWf9j/34.jpg",
+        "https://i.postimg.cc/G2VZqwns/35.jpg",
+        "https://i.postimg.cc/cC3Pz9dk/36.jpg",
+        "https://i.postimg.cc/wThScGf7/37.jpg",
+        "https://i.postimg.cc/hPFkmB0k/38.jpg",
+        "https://i.postimg.cc/kMtrD4WN/39.jpg",
+        "https://i.postimg.cc/K8xC9DwQ/40.jpg",
+        "https://i.postimg.cc/52gTDFMJ/41.jpg",
+        "https://i.postimg.cc/9ffK2FW7/42.jpg",
+        "https://i.postimg.cc/76FWS3S3/43.jpg",
+        "https://i.postimg.cc/YSyVCK9y/44.jpg",
+        "https://i.postimg.cc/50YrH7Q9/45.jpg",
+        "https://i.postimg.cc/7hSQ95Np/46.jpg",
+        "https://i.postimg.cc/XN5h4P0Q/47.jpg",
+        "https://i.postimg.cc/MK8LTY6x/48.jpg",
+        "https://i.postimg.cc/8PB0rrcv/49.jpg",
+        "https://i.postimg.cc/dVsSRtZx/50.jpg",
+        "https://i.postimg.cc/vTw04QdX/51.jpg",
+        "https://i.postimg.cc/SxxD2Tw0/52.jpg",
+        "https://i.postimg.cc/W3k9pdxh/53.jpg",
+        "https://i.postimg.cc/0N3WqYWT/54.jpg",
+        "https://i.postimg.cc/prQq8gWv/55.jpg",
+        "https://i.postimg.cc/vHz0mF2L/56.jpg",
+        "https://i.postimg.cc/BQshsQpn/57.jpg",
+        "https://i.postimg.cc/8kLyqrhY/58.jpg",
+        "https://i.postimg.cc/GmgzkPC4/59.jpg",
+        "https://i.postimg.cc/KYKfQKGJ/60.jpg",
+        "https://i.postimg.cc/Bvdgzqts/61.jpg",
+        "https://i.postimg.cc/Y9Y3KJmF/62.jpg",
+        "https://i.postimg.cc/J08Q1Pb2/63.jpg",
+        "https://i.postimg.cc/SRGfjCdN/64.jpg",
+        "https://i.postimg.cc/MZ0DsJw2/65.jpg",
+        "https://i.postimg.cc/qvqxMt34/66.jpg",
+        "https://i.postimg.cc/dtq9pNQ7/67.jpg",
+        "https://i.postimg.cc/MKdYS0X9/68.jpg",
+        "https://i.postimg.cc/x1Zyk0vH/69.jpg",
+        "https://i.postimg.cc/N0r8mWDn/70.jpg",
+        "https://i.postimg.cc/NMq64pPj/71.jpg",
+        "https://i.postimg.cc/HnTQGjmG/72.jpg",
+        "https://i.postimg.cc/bJxQFkKH/73.jpg",
+        "https://i.postimg.cc/brL1q8YZ/74.jpg",
+        "https://i.postimg.cc/CLPbtF6t/75.jpg",
+        "https://i.postimg.cc/PfMWWbbd/76.jpg",
+        "https://i.postimg.cc/yYczpdd6/26.jpg",
+        "https://i.postimg.cc/NFGrJV8B/78.png",
+        "https://i.postimg.cc/RhPJjRGf/79.png",
+        "https://i.postimg.cc/4dQ91Z9W/80.png",
+        "https://i.postimg.cc/mDmrDrMW/81.png",
+        "https://i.postimg.cc/PxyCw4gc/82.png",
+        "https://i.postimg.cc/Gm6GLXRx/83.png",
+        "https://i.postimg.cc/RFBtfqN3/84.png",
+        "https://i.postimg.cc/q7nnz2MV/85.png",
+        "https://i.postimg.cc/8Pj77LtK/86.png",
+        "https://i.postimg.cc/pVkjhWxT/87.png",
+        "https://i.postimg.cc/dt1yGbt9/88.png",
+        "https://i.postimg.cc/zXcR7xyY/89.png",
+        "https://i.postimg.cc/0NgKRrGt/90.png",
+        "https://i.postimg.cc/V6f6mtJF/91.png",
+        "https://i.postimg.cc/Gpk8crqb/92.png",
+        "https://i.postimg.cc/j5tW29FP/93.png",
+        "https://i.postimg.cc/6qQyLZwQ/94.png",
+        "https://i.postimg.cc/CMvZMcHn/95.png",
+        "https://i.postimg.cc/ZK2Cp0QT/96.png",
+        "https://i.postimg.cc/xdS8phYh/97.png",
+        "https://i.postimg.cc/9ftM6bQM/98.png",
+        "https://i.postimg.cc/sgW1csF5/99.png"
+    ]
+    tiao2 = [
+        "https://i.postimg.cc/yNkKPT3t/100.png",
+        "https://i.postimg.cc/RFtBrVRT/101.png",
+        "https://i.postimg.cc/pd4H1nDT/102.png",
+        "https://i.postimg.cc/bNgjf5Q4/103.png",
+        "https://i.postimg.cc/prttPbcM/104.png",
+        "https://i.postimg.cc/Z5qzbLHn/105.png",
+        "https://i.postimg.cc/Y0fB9nTG/106.png",
+        "https://i.postimg.cc/qB8TjqgJ/107.png",
+        "https://i.postimg.cc/ydcwQp1Q/108.png",
+        "https://i.postimg.cc/13d29147/109.png",
+        "https://i.postimg.cc/7Ywyc4Tg/110.png",
+        "https://i.postimg.cc/Cx6TzfrN/111.png",
+        "https://i.postimg.cc/d0kMdtzK/112.png",
+        "https://i.postimg.cc/d0zb9cYZ/113.png",
+        "https://i.postimg.cc/RhT293nw/114.png",
+        "https://i.postimg.cc/Pfbg17FN/115.png",
+        "https://i.postimg.cc/cCWPV76s/116.png",
+        "https://i.postimg.cc/j50176Hz/117.png",
+        "https://i.postimg.cc/TYY4g3DH/118.png",
+        "https://i.postimg.cc/ncH62162/119.png",
+        "https://i.postimg.cc/9FJsn72h/120.png",
+        "https://i.postimg.cc/BnbR9nZ1/121.png",
+        "https://i.postimg.cc/cJ8jCknx/122.png",
+        "https://i.postimg.cc/B6TVc8pR/123.png",
+        "https://i.postimg.cc/yx7rfVrx/124.png",
+        "https://i.postimg.cc/tJDvwLL5/125.png",
+        "https://i.postimg.cc/L4VWJ1n1/126.png",
+        "https://i.postimg.cc/T12CVtpW/127.png",
+        "https://i.postimg.cc/J46dqC37/128.png",
+        "https://i.postimg.cc/XYr111xf/129.png",
+        "https://i.postimg.cc/7Y6KbtFF/130.png",
+        "https://i.postimg.cc/DZPx49yT/131.png",
+        "https://i.postimg.cc/Vs47fPV9/132.png",
+        "https://i.postimg.cc/Pxj6xXHy/133.png",
+        "https://i.postimg.cc/tJrD2Fxv/134.png",
+        "https://i.postimg.cc/T3B7zjHZ/135.png"
+    ]
+    yulu = [
+        "233",
+        "调老师大失败",
+        "还是骗人去打然后自己偷偷打掉了",
+        "可以获得第一手调老师语录",
+        "好家伙",
+        "要打全1",
+        "小朋友你好",
+        "恶霸们能不能别压了",
+        "我是不是也太狂了",
+        "啊这菜鸟果然不是我能揣摩的",
+        "即使是我们打极限的有时也会说出很傻的话的",
+        "别发了",
+        "好好打图",
+        "不摸鱼怎么轮得到我捡漏直接捡了三",
+        "你这头像很贴切啊",
+        "为了赚粉丝装菜",
+        "曾经以为自己很厉害",
+        "毕竟有眼色",
+        "这绝对是诈骗",
+        "快交版权费暴论",
+        "我刀已出完背刺",
+        "警惕调老师骗局",
+        "不哭成年人了都",
+        "别后悔",
+        "打这么水的关还要动脑子吗简单",
+        "那不就是我的天下了吗",
+        "按老规矩办了",
+        "经典断章取义了",
+        "还想不想混了",
+        "我是不是也太狂了",
+        "这种妹子难道你没有蹂躏她的冲动吗涩色强奸",
+        "优化优化就过了",
+        "我发的难道不钢板",
+        "蚌埠住了绷不住了邦邦住了",
+        "死宅长啥样啊",
+        "哪来的臭鱼烂虾傻逼sbnt",
+        "我就是彩笔有意见吗",
+        "如果你和我这咸鱼水平差不多那我也不怪你但你有这个实力浪费时间去看别人开荒这不是三星队极限圈的损失吗",
+        "我不可能输我竟然被刺了可恶啊我输了",
+        "不是我的菜",
+        "让他压他不压昨办他不压我只好去打了",
+        "朋友你有问题啊",
+        "不来刺调老师吗被刺率高达9%",
+        "因为你是大佬nb",
+        "塔防是个什么玩意",
+        "我开玩笑呢",
+        "我觉着概率有2%能刺人我就会凹",
+        "als老师爬",
+        "你是不是1级队玩多了",
+        "反驳你一下下",
+        "看来刺是肯定的了",
+        "?？又玩我",
+        "靠又要肝视频了吗不对还是先看大佬思路再想办法优化比较省力的样纸",
+        "都是碾压菜鸟的水平",
+        "恶霸人尽皆知",
+        "大佬能不能刺一下我的视频啊ovo",
+        "大快人心",
+        "说了能压的感觉还能压",
+        "我反正一看就不像钢板",
+        "不像某大叔",
+        "太坏了欺负我萌新",
+        "压个人给我看呀挑衅",
+        "楼上都是神仙",
+        "听说昨天有人乱说话",
+        "想刺人和赌博一样可千万别去尝试试了只会越陷越深",
+        "不nb菜",
+        "深蓝老师的上限真的不可估量那是谁",
+        "优化了个箱子",
+        "我知错了",
+        "下次活动盯着你刺你没了",
+        "箱子蓝香子兰表示愤怒生气",
+        "别装了",
+        "还要学什么吗",
+        "别给我逮住机会",
+        "别凡尔赛了下次面基打你哦",
+        "还是调香调箱简单几个小时一个记录",
+        "简直就是个fw",
+        "按老规矩办了",
+        "有箱子我直接进军满配好吗",
+        "就我这水平算了吧谦虚",
+        "我觉得我不内卷啊",
+        "不要凡尔赛",
+        "快来质疑调老师箱子图的权威",
+        "不对我是菜鸡",
+        "不愧是我太坏了嘉然",
+        "大魔法师",
+        "别怪我没提醒你",
+        "我这么人畜无害的谦虚",
+        "rlgl",
+        "偷偷手冲了点",
+        "不行我也要退坑",
+        "你会玩来问我做啥呢干啥",
+        "狼来啦",
+        "太假了",
+        "认真点讨论极限吧",
+        "真的云玩家",
+        "我也水图虐菜",
+        "这表情包未免太好用了",
+        "让als露背然后刺他一手",
+        "太难了",
+        "好耶",
+        "这么萌的吗",
+        "我手上怎么突然多出了汽油和火把fff团烧情侣",
+        "我不想破坏大家玩114箱子图的乐趣",
+        "我也得偷偷打",
+        "但是这样压其实有意义啊",
+        "刺人不好",
+        "我啥时候说过了",
+        "辣鸡",
+        "我肯定厉害啊装Bb",
+        "谁敢清理遗像这样的大佬我第一个跳出来",
+        "本人方舟极限圈只输als一个人装Bb",
+        "快来打",
+        "别开心的太早",
+        "过你妹啊",
+        "我狠下心来刺人还是有点可怕的",
+        "我也是",
+        "有截图的话再打可就来不及了哦",
+        "凹都可以凹",
+        "某人的话还能信吗",
+        "很简单",
+        "只允许你装菜不允许我卖萌吗",
+        "我现在也不怎么刺人",
+        "大佬好自信啊不怕被压人吗",
+        "二姐交给你们了",
+        "钢板压不到底不如直接不打",
+        "犯罪预告",
+        "你缺少潜能钱能快去充钱",
+        "我超嘉然夹心糖",
+        "恶霸们能不能别压了",
+        "我很好奇",
+        "哈哈我要飘到天上去了",
+        "我骗过人吗只是干过人而已狠",
+        "素质呢骂",
+        "还好我动作快差点又被刺了",
+        "大佬都打不过我"
+    ]
+    res = []
+    pos = 0
+    function nextone() {
+        if (pos > res.length) { pos = 0 }
+        document.getElementById("demo2").innerHTML = "相似度:" + res[pos][0].toFixed(3)
+        num = res[pos][1]
+        if (num <= 99) {
+            image.src = tiao1[num]
+        }
+        if (num > 99) {
+            image.src = tiao2[num - 100]
+        }
+        pos++
     }
-  }
-}
-	document.getElementById("结果").innerHTML=res;
-}
+    function rando() {
+        max = 135
+        num = Math.floor(Math.random() * max + 1)
+        if (num <= 99) {
+            image.src = tiao1[num]
+        }
+        if (num > 99) {
+            image.src = tiao2[num - 100]
+        }
+    }
+    function main() {
+        flag = 0
+        pos = 0
+        res.splice(0, res.length)
+        inp = document.getElementById("inp").value
+        for (i = 1; i < yulu.length; i++) {
+            tmp = similar(inp, yulu[i])
+            if (tmp > 0) {
+                flag = 1
+                res.push([tmp, i])
+            }
+        }
+        if (flag == 0) {
+            document.getElementById("demo").innerHTML = "没有找到相关语录！"
+            image.src = ""
+        } else {
+            res.sort(function (x, y) { return y[0] - x[0] })
+            document.getElementById("demo").innerHTML = "成功找到相关语录！"
+            nextone()
+        }
+    }
+    function similar(a, b) {
+        if (!a || !b) { return 0; }
+        if (a.length > b.length) { var t = b; b = a; a = t; } // 保证 a <= b
+        var al = a.length, bl = b.length;
+        var mp = []; // 一个表
+        var i, j, ai, lt, tmp; // ai：字符串a的第i个字符。 lt：左上角的值。 tmp：暂存新的值。
+        for (i = 0; i <= bl; i++) { mp[i] = i; }
+        for (i = 1; i <= al; i++) {
+            ai = a.charAt(i - 1);
+            lt = mp[0];
+            mp[0] = mp[0] + 1;
+            for (j = 1; j <= bl; j++) {
+                tmp = Math.min(mp[j] + 1, mp[j - 1] + 1, lt + (ai == b.charAt(j - 1) ? 0 : 1));
+                lt = mp[j];
+                mp[j] = tmp;
+            }
+        }
+        return (1 - (mp[bl] / bl));
+    }
 </script>
