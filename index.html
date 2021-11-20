@@ -7,7 +7,9 @@
 </head>
 
 <body>
-    <p>输入关键词以检索最相似语录.</p>
+    <p>输入关键词以检索相似语录（点击检索，若不满意则不断点下一张）
+        目前收录了135条语录。
+    </p>
     <div id="主体">
         <span>=></span>
         <input id="inp"></input>
@@ -245,7 +247,7 @@
         "别给我逮住机会",
         "别凡尔赛了下次面基打你哦",
         "还是调香调箱简单几个小时一个记录",
-        "简直就是个fw",
+        "简直就是个fw废物",
         "按老规矩办了",
         "有箱子我直接进军满配好吗",
         "就我这水平算了吧谦虚",
@@ -329,6 +331,11 @@
         if (num > 99) {
             image.src = tiao2[num - 100]
         }
+        document.getElementById("demo").innerHTML = ""
+        document.getElementById("demo2").innerHTML = ""
+        flag = 0
+        pos = 0
+        res.splice(0, res.length)
     }
     function main() {
         flag = 0
